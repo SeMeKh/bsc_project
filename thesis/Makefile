@@ -17,6 +17,7 @@ TEXOPTIONS=-halt-on-error -shell-escape -interaction=nonstopmode -synctex=-1 -ou
 TEX0=sharifthesis.cls \
 	$(wildcard ./general/*.tex) \
 	$(wildcard ./introduction/*.tex) \
+	$(wildcard ./background/*.tex) \
 	$(wildcard ./future_works/*.tex)
 
 
