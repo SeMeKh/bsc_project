@@ -1,7 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2015/06/13 Sharif Thesis v1.2.0]
 
-\LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc,chapterprefix=true]{scrbook}
+\LoadClass[fontsize=12pt,
+	paper=A4,pagesize,
+	headsepline,
+	bibliography=totoc,
+	chapterprefix=true,
+	toc=flat]
+	{scrbook}
 
 \DeclareOption{BScThesis}{\def\@fordegree{\if@Latin B. Sc. Thesis\else پایان‌نامه‌ی کارشناسی\fi}}
 \DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
@@ -19,7 +25,9 @@
 
 \setcounter{secnumdepth}{3}
 
-\setkomafont{chapter}{\normalfont\huge\bfseries\centering}
+\addtokomafont{chapterentry}{\hspace{-1.5cm}}
+
+\renewcommand*{\raggedchapter}{\centering}
 \renewcommand*{\chapterheadstartvskip}{\vskip51pt}
 \renewcommand*{\chapterformat}{\Huge\chapapp\ \thechapter\\[5pt]}
 \renewcommand*{\chapterheadendvskip}{\vskip40pt}
@@ -177,7 +185,7 @@
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
-\RequirePackage[xindy,sanitize={name=true,description=false,symbol=true}]{glossaries} % must be after hyperref for links.
+\RequirePackage[xindy]{glossaries} % must be after hyperref for links.
 
 \RequirePackage{multicol,float,array}
 % The order of package inclusions is important
