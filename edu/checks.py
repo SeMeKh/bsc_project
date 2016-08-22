@@ -14,7 +14,7 @@ class EnrollmentCheck1(SanityCheck):
     def when(check, commit, **payload):
         return commit
 
-    def then(check, payload, return_value, exc_type, **kwargs):
+    def then(check, payload, return_cvalue, exc_type, **kwargs):
         assert exc_type is None
         assert check.old_capacity > 0
         assert payload['self'].available_capacity == check.old_capacity - 1
