@@ -2,9 +2,14 @@
 from django.core.urlresolvers import reverse
 from menu import Menu, MenuItem
 
+professor_children = (
+    MenuItem("My Offerings", reverse('professor_offering_list')),
+)
+
 Menu.add_item('main', MenuItem("Professor Panel",
                                reverse('index'),
                                weight=10,
+                               children=professor_children,
                                check=lambda request: hasattr(request.user, 'professor'),
                                ))
 

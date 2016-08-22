@@ -9,7 +9,7 @@ from django.http.response import HttpResponseForbidden
 from django.views.generic.base import RedirectView, TemplateView, View
 from functools import wraps
 from edu.models import Student, Professor
-from edu.views import index, student, staff
+from edu.views import index, student, staff, professor
 
 
 def student_required(view):
@@ -63,6 +63,7 @@ student_urls = [
 
 professor_urls = [
     url(r'^$', TemplateView.as_view(template_name='edu/dashboard.html'), name='professor'),
+    url(r'^offerings/', include(basic_crud('professor_offering', **professor.offering_views))),
 ]
 
 staff_urls = [

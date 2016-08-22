@@ -7,6 +7,9 @@ from insanity.action import action
 class Course(models.Model):
     name = models.CharField(max_length=32)
 
+    def __str__(self):
+        return self.name
+
 
 class Student(models.Model):
     user = models.OneToOneField('auth.User', blank=True, null=True)
@@ -25,7 +28,7 @@ class Professor(models.Model):
     user = models.OneToOneField('auth.User', blank=True, null=True)
 
     def __str__(self):
-        return 'Professor%d' % (self.id or -1)
+        return self.user.get_full_name()
 
 
 class EnrollmentError(Exception):
@@ -81,3 +84,6 @@ class Enrollment(models.Model):
 
 class Semester(models.Model):
     name = models.CharField(max_length=16)
+
+    def __str__(self):
+        return self.name
