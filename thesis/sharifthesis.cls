@@ -84,7 +84,7 @@
   \fi
   \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[3\bigskipamount]%
     {\@titlepagesize\@undersup}\\{\st@supervisor}%
-    \ifdefined\st@consult\\[3\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@Latin\\[4\bigskipamount]\else\\[3\bigskipamount]\fi\else\if@Latin\\[7\bigskipamount]\else\\[6\bigskipamount]\fi\fi}
+    \ifdefined\st@consult\\[1\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@Latin\\[4\bigskipamount]\else\\[3\bigskipamount]\fi\else\if@Latin\\[7\bigskipamount]\else\\[6\bigskipamount]\fi\fi}
   \def\@date{\ifdefined\st@date\st@date\else\if@Latin\latintoday\else\today\fi\fi\vspace{-100pt}}
   \origin@lmaketitle
   \newcommand\date[1]{\def\st@date{##1}}
