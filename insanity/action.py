@@ -1,7 +1,7 @@
 import functools
 import inspect
 
-from insanity.apps import all_checks
+from insanity.apps import all_scenarios
 
 
 class Action(object):
@@ -13,20 +13,20 @@ class Action(object):
     def __init__(self, name, payload):
         self.name = name
         self.payload = payload
-        self._checks = []
+        self._scenarios = []
 
     def __getitem__(self, item):
         return self.payload[item]
 
-    def _collect_checks(self):
-        for check_class in all_checks[self.name]:
-            check = check_class(self)
-            if check.when(**self.payload) and check.given(**self.payload):
-                self._checks.append(check)
+    def _collect_scenarios(self):
+        for scenario_class in all_scenarios[self.name]:
+            scenario = scenario_class(self)
+            if scenario.when(**self.payload) and scenario.given(**self.payload):
+                self._scenarios.append(scenario)
 
-    def _assert_checks(self):
-        for check in self._checks:
-            check.then(exc_type=self.exc_type, exc_val=self.exc_val, exc_tb=self.exc_tb,
+    def _assert_scenarios(self):
+        for scenario in self._scenarios:
+            scenario.then(exc_type=self.exc_type, exc_val=self.exc_val, exc_tb=self.exc_tb,
                        return_value=self.return_value, payload=self.payload)
 
 
@@ -45,7 +45,7 @@ class action(object):
         if self.name is None:
             raise ValueError('Action should be decorator or have explicit name')
         action_instance = Action(self.name, self._payload)
-        action_instance._collect_checks()
+        action_instance._collect_scenarios()
         self._stack.append(action_instance)
         return action_instance
 
@@ -54,7 +54,7 @@ class action(object):
         action_instance.exc_type = exc_type
         action_instance.exc_val = exc_val
         action_instance.exc_tb = exc_tb
-        action_instance._assert_checks()
+        action_instance._assert_scenarios()
         return False  # Do not suppress exception
 
     def rename_self(self, name):

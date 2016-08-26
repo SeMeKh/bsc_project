@@ -2,14 +2,12 @@ import logging
 import importlib
 import inspect
 from collections import defaultdict
-
 from django.apps import AppConfig, apps
-
-from insanity.sanity_check import SanityCheck
+from insanity.scenario import Scenario
 
 logger = logging.getLogger('insanity')
 
-all_checks = defaultdict(list)
+all_scenarios = defaultdict(list)
 
 
 class InsanityConfig(AppConfig):
@@ -19,12 +17,12 @@ class InsanityConfig(AppConfig):
         logging.info("Harvesting")
         for _, app in apps.app_configs.items():
             module = app.module
-            check_name = module.__name__ + '.checks'
+            scenario_name = module.__name__ + '.scenarios'
             try:
-                checks = importlib.import_module(check_name)
+                scenarios = importlib.import_module(scenario_name)
 
-                for name, obj in inspect.getmembers(checks, inspect.isclass):
-                    if obj.__module__ == check_name and issubclass(obj, SanityCheck):
-                        all_checks[obj.action_name].append(obj)
+                for name, obj in inspect.getmembers(scenarios, inspect.isclass):
+                    if obj.__module__ == scenario_name and issubclass(obj, Scenario):
+                        all_scenarios[obj.action_name].append(obj)
             except:
                 pass

@@ -1,10 +1,10 @@
 import inspect
 
 from edu.models import Enrollment, EnrollmentError
-from insanity.sanity_check import SanityCheck
+from insanity.scenario import Scenario
 
 
-class EnrollmentCheck1(SanityCheck):
+class EnrollmentCheck1(Scenario):
     action_name = 'edu.models.Offering.enroll'
 
     def given(check, self, student, **payload):
@@ -22,7 +22,7 @@ class EnrollmentCheck1(SanityCheck):
         print('checked1')
 
 
-class EnrollmentCheck2(SanityCheck):
+class EnrollmentCheck2(Scenario):
     action_name = 'edu.models.Offering.enroll'
 
     def given(check, self, **payload):
@@ -33,7 +33,7 @@ class EnrollmentCheck2(SanityCheck):
         print('checked2')
 
 
-class EnrollmentCheck3(SanityCheck):
+class EnrollmentCheck3(Scenario):
     action_name = 'edu.models.Offering.enroll'
 
     def then(check, payload, **kwargs):
@@ -42,7 +42,7 @@ class EnrollmentCheck3(SanityCheck):
         print('checked3')
 
 
-class SampleContextCheck4(SanityCheck):
+class SampleContextCheck4(Scenario):
     action_name = 'offeringCapacityChangeByStaff'
 
     def then(check, payload, **kwargs):
@@ -51,7 +51,7 @@ class SampleContextCheck4(SanityCheck):
         print('checked4')
 
 
-class SampleContextCheck5(SanityCheck):
+class SampleContextCheck5(Scenario):
     action_name = 'offeringCapacityChangeByStaff'
 
     def then(check, payload, **kwargs):
