@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2015/06/13 Sharif Thesis v1.2.0]
 
-\LoadClass[fontsize=12pt,
+\LoadClass[fontsize=14pt,
 	paper=A4,pagesize,
 	headsepline,
 	bibliography=totoc,
@@ -18,7 +18,7 @@
 
 \ProcessOptions\relax
 
-\RequirePackage{amsmath,amsthm,scrpage2,rotating,scrhack}
+\RequirePackage{amsmath,amsthm,scrpage2,rotating,scrhack,setspace}
 
 \renewcommand\headfont{\small\itshape}
 \renewcommand*\sectfont{\normalcolor\bfseries}
@@ -84,7 +84,7 @@
   \fi
   \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[3\bigskipamount]%
     {\@titlepagesize\@undersup}\\{\st@supervisor}%
-    \ifdefined\st@consult\\[1\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@Latin\\[4\bigskipamount]\else\\[3\bigskipamount]\fi\else\if@Latin\\[7\bigskipamount]\else\\[6\bigskipamount]\fi\fi}
+    \ifdefined\st@consult\\[1\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@Latin\\[1\bigskipamount]\else\\[1\bigskipamount]\fi\else\if@Latin\\[1\bigskipamount]\else\\[1\bigskipamount]\fi\fi}
   \def\@date{\ifdefined\st@date\st@date\else\if@Latin\latintoday\else\today\fi\fi\vspace{-100pt}}
   \origin@lmaketitle
   \newcommand\date[1]{\def\st@date{##1}}
