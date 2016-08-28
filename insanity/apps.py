@@ -3,6 +3,8 @@ import importlib
 import inspect
 from collections import defaultdict
 from django.apps import AppConfig, apps
+from django.conf import settings
+
 from insanity.scenario import Scenario
 
 logger = logging.getLogger('insanity')
@@ -14,6 +16,10 @@ STATS_FAIL = 'fail'
 STATS_COUNT = 'count'
 STATS_PASS = 'pass'
 
+from raven import Client
+
+client = Client(settings.SENTRY_DSN)
+
 
 def fqn(cls):
     return '%s.%s' % (cls.__module__, cls.__name__)
@@ -23,6 +29,9 @@ def report_exec(scenario, fail):
     name = fqn(scenario.__class__)
     stats = all_stats[name]
     if fail:
+        client.captureException(extra={
+            'scenario': name,
+        })
         stats[STATS_FAIL] += 1
     else:
         stats[STATS_PASS] += 1
