@@ -8,14 +8,18 @@
                     <thead>
                     <tr>
                         <th>Scenario</th>
-                        <th class="col-sm-4">Triggered (Pass/Fail)</th>
+                        <th class="col-sm-1">Triggered (Pass/Fail)</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for scenario,stats in all_stats.items %}
                         <tr class="{% if stats.count == 0 %}warning{% elif stats.fail == 0 %}success{% else %}danger{% endif %}">
                             <td>{{ scenario }}</td>
-                            <td>{{ stats.count }} ({{ stats.pass }}/{{ stats.fail }})</td>
+                            <td>{{ stats.count }} ({{ stats.pass }}/{{ stats.fail }}){% if stats.fail != 0 %}
+                                <a href="{{ SENTRY_URL }}?query=scenario%3A%22{{ scenario }}%22">
+                                    <span class="glyphicon glyphicon-link"></span>
+                                </a>
+                            {% endif %}</td>
                         </tr>
                     {% endfor %}
                     <tfoot></tfoot>
