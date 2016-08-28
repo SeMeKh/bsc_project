@@ -57,6 +57,6 @@ class InsanityConfig(AppConfig):
                             STATS_COUNT: 0,
                             STATS_PASS: 0,
                         }
-                        all_scenarios[obj.action_name].append(obj)
+                        all_scenarios[obj.when].append(obj)
             except:
                 pass

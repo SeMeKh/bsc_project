@@ -5,13 +5,13 @@ from insanity.scenario import Scenario
 
 
 class EnrollmentScenario1(Scenario):
-    action_name = 'edu.models.Offering.enroll'
-
     def given(scenario, self, student, **payload):
         scenario.old_capacity = self.available_capacity
         return True
 
-    def when(scenario, commit, **payload):
+    when = 'edu.models.Offering.enroll'
+
+    def when_params(scenario, commit, **payload):
         return commit
 
     def then(scenario, payload, return_value, exc_type, **kwargs):
@@ -20,7 +20,7 @@ class EnrollmentScenario1(Scenario):
 
 
 class EnrollmentScenario2(Scenario):
-    action_name = 'edu.models.Offering.enroll'
+    when = 'edu.models.Offering.enroll'
 
     def then(scenario, payload, **kwargs):
         o1 = payload['self']
@@ -30,7 +30,7 @@ class EnrollmentScenario2(Scenario):
 
 
 class EnrollmentScenario3(Scenario):
-    action_name = 'edu.models.Offering.enroll'
+    when = 'edu.models.Offering.enroll'
 
     def given(scenario, self, **payload):
         return self.available_capacity == 0
@@ -41,7 +41,7 @@ class EnrollmentScenario3(Scenario):
 
 
 class SampleContextScenario4(Scenario):
-    action_name = 'offeringCapacityChangeByStaff'
+    when = 'offeringCapacityChangeByStaff'
 
     def then(scenario, payload, **kwargs):
         offering = payload['offering']
@@ -50,7 +50,7 @@ class SampleContextScenario4(Scenario):
 
 
 class SampleContextScenario5(Scenario):
-    action_name = 'offeringCapacityChangeByStaff'
+    when = 'offeringCapacityChangeByStaff'
 
     def then(scenario, payload, **kwargs):
         offering = payload['offering']

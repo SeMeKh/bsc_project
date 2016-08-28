@@ -20,7 +20,7 @@ class Action(object):
     def _collect_scenarios(self):
         for scenario_class in all_scenarios[self.name]:
             scenario = scenario_class(self)
-            if scenario.when(**self.payload) and scenario.given(**self.payload):
+            if scenario.when_params(**self.payload) and scenario.given(**self.payload):
                 self._scenarios.append(scenario)
 
     def _assert_scenarios(self):
@@ -38,8 +38,8 @@ class action(object):
     ContextManager and Decorator for creating Action instances
     """
 
-    def __init__(__insanity_self__, __insanity_action_name__=None, **payload):
-        __insanity_self__.name = __insanity_action_name__
+    def __init__(__insanity_self__, __insanity_when__=None, **payload):
+        __insanity_self__.name = __insanity_when__
         __insanity_self__._payload = payload
         __insanity_self__._stack = []
         __insanity_self__._self_name = None
