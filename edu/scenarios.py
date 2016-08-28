@@ -7,8 +7,8 @@ from insanity.scenario import Scenario
 class EnrollmentScenario1(Scenario):
     action_name = 'edu.models.Offering.enroll'
 
-    def given(scenario, o1, s2, **payload):
-        scenario.old_capacity = o1.available_capacity
+    def given(scenario, self, student, **payload):
+        scenario.old_capacity = self.available_capacity
         return True
 
     def when(scenario, commit, **payload):
