@@ -14,12 +14,6 @@ class Course(models.Model):
 class Student(models.Model):
     user = models.OneToOneField('auth.User', blank=True, null=True)
 
-    def get_max_units(self):
-        pass
-
-    def current_semester_units(self):
-        pass
-
     def __str__(self):
         return 'Student%d' % (self.id or -1)
 
@@ -67,10 +61,6 @@ class Offering(models.Model):
 
     def change_capacity(self, new_capacity, commit=True):
         enrollment_count = self.capacity - self.available_capacity
-        if new_capacity < enrollment_count:
-            raise ChangeCapacityError(
-                'There are already %d enrollments which is less than %d' % (enrollment_count, new_capacity)
-            )
         self.capacity = new_capacity
         self.available_capacity = new_capacity - enrollment_count
         if commit:

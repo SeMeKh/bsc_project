@@ -2,6 +2,10 @@ import functools
 import inspect
 from insanity.apps import all_scenarios, report_exec
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class Action(object):
     return_value = None
@@ -22,14 +26,17 @@ class Action(object):
             scenario = scenario_class(self)
             if scenario.when_params(**self.payload) and scenario.given(**self.payload):
                 self._scenarios.append(scenario)
+                print('~~~ Scenario %s detected ~~~' % scenario_class.__name__)
 
     def _assert_scenarios(self):
         for scenario in self._scenarios:
             try:
                 scenario.then(exc_type=self.exc_type, exc_val=self.exc_val, exc_tb=self.exc_tb,
                               return_value=self.return_value, payload=self.payload)
+                print('~~~ Scenario %s succeeded ~~~' % scenario.__class__.__name__)
                 report_exec(scenario, fail=False)
             except:
+                print('~~~ Scenario %s failed ~~~' % scenario.__class__.__name__)
                 report_exec(scenario, fail=True)
 
 
