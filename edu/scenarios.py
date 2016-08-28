@@ -36,7 +36,7 @@ class EnrollmentScenario3(Scenario):
         return self.available_capacity == 0
 
     def then(scenario, exc_type, **kwargs):
-        assert issubclass(exc_type, EnrollmentError)
+        assert not issubclass(exc_type, EnrollmentError)
         print('checked2')
 
 
