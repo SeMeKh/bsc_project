@@ -86,6 +86,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hijack/', include('hijack.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^insanity/', include('insanity.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

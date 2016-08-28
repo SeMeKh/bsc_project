@@ -1,7 +1,6 @@
 import functools
 import inspect
-
-from insanity.apps import all_scenarios
+from insanity.apps import all_scenarios, report_exec
 
 
 class Action(object):
@@ -26,8 +25,12 @@ class Action(object):
 
     def _assert_scenarios(self):
         for scenario in self._scenarios:
-            scenario.then(exc_type=self.exc_type, exc_val=self.exc_val, exc_tb=self.exc_tb,
-                       return_value=self.return_value, payload=self.payload)
+            try:
+                scenario.then(exc_type=self.exc_type, exc_val=self.exc_val, exc_tb=self.exc_tb,
+                              return_value=self.return_value, payload=self.payload)
+                report_exec(scenario, fail=False)
+            except:
+                report_exec(scenario, fail=True)
 
 
 class action(object):

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Insanity{% endblock %}</title>
+    <link href="{% static 'edu/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'edu/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+<script src="{% static 'edu/js/jquery.min.js' %}"></script>
+<script src="{% static 'edu/js/bootstrap.min.js' %}"></script>
+{% block body %}
+{% endblock %}
+</body>
+</html>

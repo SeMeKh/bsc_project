@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th class="col-sm-4">Triggered (Pass/Fail)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for scenario,stats in all_stats.items %}
+                        <tr class="{% if stats.count == 0 %}warning{% elif stats.fail == 0 %}success{% else %}danger{% endif %}">
+                            <td>{{ scenario }}</td>
+                            <td>{{ stats.count }} ({{ stats.pass }}/{{ stats.fail }})</td>
+                        </tr>
+                    {% endfor %}
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
