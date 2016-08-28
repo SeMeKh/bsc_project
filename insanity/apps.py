@@ -29,7 +29,7 @@ def report_exec(scenario, fail):
     name = fqn(scenario.__class__)
     stats = all_stats[name]
     if fail:
-        client.captureException(extra={
+        client.captureException(tags={
             'scenario': name,
         })
         stats[STATS_FAIL] += 1
