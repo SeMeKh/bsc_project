@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2015/06/13 Sharif Thesis v1.2.0]
 
-\LoadClass[fontsize=14pt,
+\LoadClass[fontsize=12pt,
 	paper=A4,pagesize,
 	headsepline,
 	bibliography=totoc,
@@ -17,7 +17,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 \ProcessOptions\relax
-
+% \RequirePackage{fancyvrb}       
 \RequirePackage{amsmath,amsthm,scrpage2,rotating,scrhack,setspace}
 
 \renewcommand\headfont{\small\itshape}
@@ -181,6 +181,10 @@
     \definecolor{darkblue}{rgb}{0,0,0.5}    % Web color: Navy
 % end of colors
 
+\RequirePackage[toc,page]{appendix}
+\renewcommand{\appendixpagename}{پیوست‌ها}
+
+% \RequirePackage{changepage}     
 \RequirePackage[xetex,colorlinks,bookmarksnumbered,linkcolor=darkblue,citecolor=darkred,urlcolor=darkgreen]{hyperref}
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
@@ -198,7 +202,9 @@
 %% Now actually use the newly defined style.
 \urlstyle{leo}
 
-\RequirePackage{xifthen}% Provides \isempty test which is used for glossary
+\RequirePackage{xifthen}% Provides \isempty test which is used for
+% glossary
+
 
 % equivalent commands and environments
 \eqcommand{دانشگاه}{university}

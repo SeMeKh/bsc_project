@@ -1,0 +1,49 @@
+\قسمت{تألیف \واژه{سناریو} برای سامانه}
+\برچسب{sec:edu-bdd}
+
+جهت تألیف \واژه{تست}، ابتدا \واژه{یوزر.استوری.ها}ی مورد نظر نوشته شده و از آن‌ها \واژه{سناریو}‌هایی استخراج می‌شود. نتیجه‌ی این کار برای دو \واژه{سناریو}ی نمونه در زیر آمده:
+
+\begin{minipage}{\textwidth}
+\latin
+\textbf{Story}: Enrollment of student in offering\\
+\textbf{As a} student\\
+\textbf{I want to} enroll in an offering\\
+\textbf{So that} I am allowed to participate in an offering's classes\\
+\\
+\\
+\textbf{Scenario 1}: A successful enrollment should be consistent with offering's capacity
+\textbf{Given}
+	an offering \texttt{o1}, and a student \texttt{s1}\\
+\textbf{When}
+	\texttt{s1} successfully enrolls in \texttt{o1}\\
+\textbf{Then}
+	\texttt{s1} should have had at least one empty seat before enrollment\\
+\textbf{And}
+	\texttt{s1}'s available capacity should have been decreased by one\\
+\\
+\textbf{Scenario 2}: An offering's capacity should stay consistent with actual enrollments 
+\textbf{Given}
+	an offering \texttt{o1}\\
+\textbf{When}
+	an enrollment in \texttt{o1} happens\\
+\textbf{Then}
+	value of \texttt{o1}'s \texttt{used\_capacity} field should be equal to number of enrolled students in \texttt{o1}\\
+\end{minipage}
+
+گام بعدی انتقال \واژه{سناریو}‌ها از زبان \واژه{given-when-then} به نرم‌افزار است. باید توجه کرد که نباید در این مسیر از کلیت \واژه{سناریو}‌ها کاسته شود، که این موضوع در \واژه{فریم.ورک} پیشنهادی، با توجه به جدا شدن لایه‌ی \واژه{سناریو} از لایه‌ی \واژه{اکتور} به سادگی محقق می‌شود و تقریباً ترجمه‌ی عبارات به زبان برنامه‌نویسی مقصد کفایت می‌کند. نتیجه‌ی انجام این کار برای دو سناریوی مذکور در شکل‌های \رجوع{fig:scenario-code} آمده.
+
+\شروع{شکل}[tbp]
+\تنظیم‌ازوسط
+\درج‌تصویر[پهنا=0.9\پهنای‌سطر]{scenario-code}
+\تر\موقتم{
+کد معادل سناریو
+}
+\شرح[\موقتم]{\موقتم}
+\برچسب{fig:scenario-code}
+\پایان{شکل}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

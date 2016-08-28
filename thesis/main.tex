@@ -18,10 +18,11 @@
 \def\enAuthor{Seyed Mehran Kholdi, Mohammad Hossein Sekhavat}
 \def\enKeywords{Behavior-Driven Development, Decoupling, Software Test Quality, Test Framework}
 
+\newenvironment{simplecode}{\latin\renewcommand\baselinestretch{1}\begin{verbatim}}{}
+
 
 \input{general/preamble}
 \addbibresource{resources/resources.bib}
-
 
 \newcommand{\faKeywords}{توسعه‌ی مبتنی بر رفتار، مستقل‌سازی، کیفیت آزمون نرم‌افزار، چارچوب آزمون}
 \eqcommand{واژه‌های‌کلیدی}{faKeywords}
@@ -77,7 +78,10 @@
 
 %the initial title is supposed to be printed on the cover.
 %for non final version, you can leave following commands as is to create only one title page (printed on paper)
-%for final version you need to swap folowing commented/uncommented makethesistitle commands to achieve this order: title on the cover THEN in the name of god page THEN another title page but this time printed on paper
+%for final version you need to swap folowing commented/uncommented
+%makethesistitle commands to achieve this order: title on the cover
+%THEN in the name of god page THEN another title page but this time
+%printed on paper
 \makethesistitle
 \StartDocument
 %\makethesistitle

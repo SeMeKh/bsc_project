@@ -19,6 +19,7 @@ TEX0=sharifthesis.cls \
 	$(wildcard ./introduction/*.tex) \
 	$(wildcard ./background/*.tex) \
 	$(wildcard ./our/*.tex) \
+	$(wildcard ./appendices/*.tex) \
 	$(wildcard ./future_works/*.tex)
 
 
