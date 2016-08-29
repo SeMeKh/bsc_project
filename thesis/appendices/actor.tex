@@ -1,0 +1,117 @@
+\فصل {متن برنامه‌ی تعامل‌گر سامانه‌ی ثبت‌نام}
+\برچسب{ap:actor}
+
+\begin{simplecode}
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+from edu.models import Course, Student, Semester, Professor, Offering, EnrollmentError
+import random
+import factory
+from factory import fuzzy
+
+class UserFactory(factory.Factory):
+    class Meta:
+        model = User
+
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+    username = factory.Sequence(lambda n: 'user%d' % n)
+    password = factory.Sequence(lambda n: 'pass%d' % n)
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        """Override the default ``_create`` with our custom call."""
+        manager = model_class.objects
+        # The default would use ``manager.create(*args, **kwargs)``
+        return manager.create_user(*args, **kwargs)
+
+
+class StudentFactory(factory.Factory):
+    class Meta:
+        model = Student
+
+    user = factory.SubFactory(UserFactory)
+
+
+class ProfessorFactory(factory.Factory):
+    class Meta:
+        model = Professor
+
+    user = factory.SubFactory(UserFactory)
+
+
+class CourseFactory(factory.Factory):
+    class Meta:
+        model = Course
+
+    name = fuzzy.FuzzyText(length=8, prefix='Crs_')
+
+
+class SemesterFactory(factory.Factory):
+    class Meta:
+        model = Semester
+
+    name = fuzzy.FuzzyText(length=4, prefix='Sms_')
+
+
+class OfferingFactory(factory.Factory):
+    class Meta:
+        model = Offering
+
+    course = fuzzy.FuzzyChoice(Course.objects.all())
+    semester = fuzzy.FuzzyChoice(Semester.objects.all())
+    professor = fuzzy.FuzzyChoice(Professor.objects.all())
+    capacity = fuzzy.FuzzyInteger(0, 10)
+    available_capacity = factory.LazyAttribute(lambda self: self.capacity)
+    is_enrollable = fuzzy.FuzzyChoice([True, False])
+
+def run():
+    User = get_user_model()
+    User.objects.all().delete()
+    User.objects.create_superuser('admin', 'admin@admin.com', '321321')
+
+    Course.objects.all().delete()
+    courses = CourseFactory.create_batch(10)
+    for c in courses:
+        c.save()
+
+    Student.objects.all().delete()
+    students = StudentFactory.create_batch(10)
+    for s in students:
+        s.user.save()
+        s.save()
+
+    Semester.objects.all().delete()
+    semesters = SemesterFactory.create_batch(10)
+    for s in semesters:
+        s.save()
+
+    Professor.objects.all().delete()
+    professors = ProfessorFactory.create_batch(10)
+    for p in professors:
+        p.user.save()
+        p.save()
+
+    offerings = OfferingFactory.create_batch(20)
+    for o in offerings:
+        o.save()
+
+    for i in range(10):
+        offering = random.choice(list(Offering.objects.filter(available_capacity__gt=0, is_enrollable=True)))
+        student = random.choice(students)
+        offering.enroll(student)
+
+    try:
+        offering = random.choice(list(Offering.objects.filter(available_capacity=0)))
+        student = random.choice(students)
+        offering.enroll(student, commit=False)
+    except EnrollmentError:
+        "That's OK"
+        pass
+\end{verbatim}\end{simplecode}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
