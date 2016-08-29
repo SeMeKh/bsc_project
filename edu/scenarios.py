@@ -36,7 +36,7 @@ class AvailableCapacityRemainsConsistentWhenCapacityChanges(Scenario):
     And it's total capacity should remain at least as many as number of it's enrollments
     """
 
-    def given(scenario, self):
+    def given(scenario, self, **kwargs):
         scenario.o1 = self
         return True
 
