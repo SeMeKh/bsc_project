@@ -115,26 +115,8 @@
 \newtheorem{remark}[theorem]{تذکر}
 \newtheorem{example}[theorem]{نمونه}
 
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-\hbox{}
-\vspace*{\fill}
-\begin{center}
-\textit{\rl{[این صفحه آگاهانه خالی گذاشته شده است.]}}
-\end{center}
-\vspace{\fill}
-\newpage
-\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\def\cleardoubleemptypage{\clearpage\if@twoside \ifodd\c@page\else
-\hbox{}
-\vspace*{\fill}
-\begin{center}
-\textit{\rl{[این صفحه آگاهانه خالی گذاشته شده است.]}}
-\end{center}
-\vspace{\fill}
-\thispagestyle{empty}
-\newpage
-\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-
+\def\cleardoublepage{\newpage}
+\def\cleardoubleemptypage{\newpage}
 
 \newpagestyle{pagenumberonlyPagestyle}
 {% header definition
