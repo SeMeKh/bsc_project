@@ -11,23 +11,21 @@
 \textbf{So that} I am allowed to participate in an offering's classes\\
 \\
 \\
-\textbf{Scenario 1}: A successful enrollment should be consistent with offering's capacity
+\textbf{Scenario 1}: Capacity should decrease by enroll\\
 \textbf{Given}
-	an offering \texttt{o1}, and a student \texttt{s1}\\
+	student s1, offering o1 with available capacity c0\\
 \textbf{When}
-	\texttt{s1} successfully enrolls in \texttt{o1}\\
+	s1 commits enrollment in o1\\
 \textbf{Then}
-	\texttt{s1} should have had at least one empty seat before enrollment\\
-\textbf{And}
-	\texttt{s1}'s available capacity should have been decreased by one\\
+	available capacity of o1 should become c0-1\\
 \\
-\textbf{Scenario 2}: An offering's capacity should stay consistent with actual enrollments 
+\textbf{Scenario 2}: Enrollment should fail for offering with zero capacity\\
 \textbf{Given}
-	an offering \texttt{o1}\\
+	offering o1 with zero capacity\\
 \textbf{When}
-	an enrollment in \texttt{o1} happens\\
+	someone enrolls in it\\                               
 \textbf{Then}
-	value of \texttt{o1}'s \texttt{used\_capacity} field should be equal to number of enrolled students in \texttt{o1}\\
+	it should fail with error\\
 \end{minipage}
 
 گام بعدی انتقال \واژه{سناریو}‌ها از زبان \واژه{given-when-then} به نرم‌افزار است. باید توجه کرد که نباید در این مسیر از کلیت \واژه{سناریو}‌ها کاسته شود، که این موضوع در \واژه{فریم.ورک} پیشنهادی، با توجه به جدا شدن لایه‌ی \واژه{سناریو} از لایه‌ی \واژه{اکتور} به سادگی محقق می‌شود و تقریباً ترجمه‌ی عبارات به زبان برنامه‌نویسی مقصد کفایت می‌کند. نتیجه‌ی انجام این کار برای دو سناریوی مذکور در شکل‌های \رجوع{fig:scenario-code} آمده.
