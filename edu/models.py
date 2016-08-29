@@ -59,6 +59,7 @@ class Offering(models.Model):
     def get_students(self):
         return Student.objects.filter(id__in=self.enrollment_set.values_list('student', flat=True))
 
+    @action()
     def change_capacity(self, new_capacity, commit=True):
         enrollment_count = self.capacity - self.available_capacity
         self.capacity = new_capacity
